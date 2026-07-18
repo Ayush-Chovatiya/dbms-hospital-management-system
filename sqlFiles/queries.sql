@@ -74,16 +74,28 @@ HAVING COUNT(m.medicine_name) = (
 );
 
 -- 7. Show each doctor's working schedule.
+-- 7. Show each doctor's working schedule.
 SELECT
-    p.name,
-    s.surgery_name,
-    s.surgery_date
-FROM Patient p
-JOIN MedicalHistory mh
-ON p.email = mh.patient_email
-JOIN Surgery s
-ON mh.id = s.history_id
-ORDER BY s.surgery_date DESC;
+    d.name AS doctor_name,
+    d.specialization,
+    s.day_of_week,
+    s.start_time,
+    s.end_time,
+    s.break_start,
+    s.break_end
+FROM Doctor d
+JOIN Schedule s
+ON d.email = s.doctor_email
+ORDER BY d.name,
+    CASE s.day_of_week
+        WHEN 'Monday' THEN 1
+        WHEN 'Tuesday' THEN 2
+        WHEN 'Wednesday' THEN 3
+        WHEN 'Thursday' THEN 4
+        WHEN 'Friday' THEN 5
+        WHEN 'Saturday' THEN 6
+        WHEN 'Sunday' THEN 7
+    END;
 
 -- 8. Find patients who have undergone surgery.
 SELECT
