@@ -49,7 +49,8 @@ DBMS-Hospital-Management-System/
 │   ├── data_seed.sql       # Sample data
 │   └── queries.sql         # Example SQL queries
 │
-├── diagrams/               # ER diagrams
+├── diagrams/
+|   ├── relational_schema.png
 │
 └── README.md
 ```
